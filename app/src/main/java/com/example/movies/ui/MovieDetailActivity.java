@@ -2,7 +2,7 @@ package com.example.movies.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -33,15 +33,13 @@ public class MovieDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(result.getOriginalTitle());
 
-        binding.favbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        binding.favbutton.setOnClickListener(view -> {
 
-                favourite = new Favourite(result.getOverview(), result.getPosterPath(), result.getVoteAverage(), result.getOriginalTitle());
-                viewModel.insertMovieToFav(favourite);
-                Intent intent = new Intent(MovieDetailActivity.this, FavouriteActivity.class);
-                startActivity(intent);
-            }
+            favourite = new Favourite(result.getOverview(), result.getPosterPath(), result.getVoteAverage(), result.getOriginalTitle());
+            viewModel.insertMovieToFav(favourite);
+            Toast.makeText(MovieDetailActivity.this, "Added successfully", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MovieDetailActivity.this, FavouriteActivity.class);
+            startActivity(intent);
         });
 
     }

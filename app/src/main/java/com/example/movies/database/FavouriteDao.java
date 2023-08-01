@@ -1,6 +1,7 @@
 package com.example.movies.database;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -14,6 +15,9 @@ import io.reactivex.rxjava3.core.Single;
 public interface FavouriteDao {
     @Insert
     Single<Long> insertMovieToFav(Favourite favourite);
+
+    @Delete
+    void deleteMovieFromFav(Favourite favourite);
 
     @Query("select * from Favourite")
     Single<List<Favourite>> getMovieFromFav();

@@ -44,7 +44,10 @@ public class FavMovieViewModel extends ViewModel {
         repository.showMovieFromFav().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(fav -> mutableLiveDataFav.postValue(fav), e -> Log.d(TAG, "showAllMovie: " + e.getMessage()));
+    }
 
-
+    @SuppressLint("CheckResult")
+    public void deleteMovieFromFav(Favourite favourite) {
+        repository.deleteMovieFromFav(favourite);
     }
 }

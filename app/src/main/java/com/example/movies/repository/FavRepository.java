@@ -21,6 +21,10 @@ public class FavRepository {
         return favouriteDao.insertMovieToFav(favourite);
     }
 
+    public void deleteMovieFromFav(Favourite favourite) {
+        favouriteDao.deleteMovieFromFav(favourite);
+    }
+
     public Single<List<Favourite>> showMovieFromFav() {
         return favouriteDao.getMovieFromFav();
     }

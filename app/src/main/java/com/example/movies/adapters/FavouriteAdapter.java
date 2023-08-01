@@ -12,15 +12,21 @@ import com.example.movies.R;
 import com.example.movies.databinding.FavListBinding;
 import com.example.movies.model.Favourite;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.favViewHolder> {
-    private ArrayList<Favourite> favouriteArrayList;
+    private List<Favourite> favouriteArrayList;
     private OnaFavMovieClickListener favMovieClickListener;
+    private OnaFavMovieLongClickListener onaFavMovieLongClickListener;
 
-    public FavouriteAdapter(ArrayList<Favourite> favouriteArrayList, OnaFavMovieClickListener favMovieClickListener) {
-        this.favouriteArrayList = favouriteArrayList;
+    public FavouriteAdapter(OnaFavMovieClickListener favMovieClickListener, OnaFavMovieLongClickListener onaFavMovieLongClickListener) {
         this.favMovieClickListener = favMovieClickListener;
+        this.onaFavMovieLongClickListener = onaFavMovieLongClickListener;
+    }
+
+    public void setFavouriteArrayList(List<Favourite> favouriteArrayList) {
+        this.favouriteArrayList = favouriteArrayList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -45,19 +51,27 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.favV
         return favouriteArrayList.size();
     }
 
-    class favViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class favViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         FavListBinding binding;
 
         public favViewHolder(@NonNull FavListBinding itemView) {
             super(itemView.getRoot());
             binding = itemView;
             binding.getRoot().setOnClickListener(this);
+            binding.getRoot().setOnLongClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             Favourite favourite = favouriteArrayList.get(getAbsoluteAdapterPosition());
             favMovieClickListener.onFavMovieClicked(favourite);
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            Favourite favourite = favouriteArrayList.get(getAbsoluteAdapterPosition());
+            onaFavMovieLongClickListener.onFavMovieLongClicked(favourite);
+            return false;
         }
     }
 }
