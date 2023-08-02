@@ -11,6 +11,9 @@
 - Databinding
 - CardView, RecyclerView
 
-## Preview
+## Overview
 
-https://github.com/Ahmed-Srhan/Movie-App/assets/106891451/1174d796-9887-42f2-a2c0-bcdaca3f5bfb
+
+https://github.com/Ahmed-Srhan/Movie-App/assets/106891451/13f7c9ef-6d2f-4fa4-a32e-5d0c94d77afd
+
+
